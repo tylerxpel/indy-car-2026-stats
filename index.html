@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XPEL — Dealer Quiz Results · June 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:           #F5F5F2;
+      --surface:      #FFFFFF;
+      --surface-2:    #EFEEEB;
+      --border:       #E3E2DE;
+      --text:         #1A1A18;
+      --text-sec:     #69696A;
+      --text-muted:   #A3A3A0;
+      --accent:       #F5C200;
+      --accent-dim:   #FEF9E0;
+      --dark:         #0F0F0D;
+      --green:        #16A34A;
+      --green-bg:     #DCFCE7;
+      --amber:        #D97706;
+      --amber-bg:     #FEF3C7;
+      --blue:         #2563EB;
+      --blue-bg:      #DBEAFE;
+      --red:          #DC2626;
+      --red-bg:       #FEE2E2;
+      --r:            10px;
+      --r-sm:         7px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─────────────────────── HEADER ─────────────────────── */
+    header {
+      background: var(--dark);
+      padding: 16px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .logo-block {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      height: 24px;
+      width: auto;
+      display: block;
+    }
+
+    .logo-text {
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: #FFFFFF;
+      font-style: italic;
+      display: none;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    .logo-sub {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .header-right {
+      text-align: right;
+    }
+
+    .header-tag {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .header-date {
+      display: block;
+      font-size: 12px;
+      color: rgba(255,255,255,0.35);
+      margin-top: 2px;
+    }
+
+    /* ─────────────────────── MAIN ─────────────────────── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 52px 32px 80px;
+    }
+
+    /* ─────────────────────── PAGE INTRO ─────────────────────── */
+    .page-intro {
+      margin-bottom: 44px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-intro h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .page-intro p {
+      color: var(--text-sec);
+      max-width: 580px;
+      font-size: 14px;
+    }
+
+    /* ─────────────────────── KPI CARDS ─────────────────────── */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 44px;
+    }
+
+    .kpi {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 20px 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .kpi.highlight::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .kpi-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 7px;
+      color: var(--text);
+    }
+
+    .kpi-sub {
+      font-size: 12.5px;
+      color: var(--text-sec);
+    }
+
+    .kpi-sub .pos { color: var(--green); font-weight: 600; }
+    .kpi-sub .warn { color: var(--amber); font-weight: 600; }
+
+    /* ─────────────────────── SECTION ─────────────────────── */
+    .section {
+      margin-bottom: 44px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .section-header h2 {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .section-header .meta {
+      font-size: 12.5px;
+      color: var(--text-muted);
+    }
+
+    /* ─────────────────────── CARD ─────────────────────── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 26px;
+    }
+
+    /* ─────────────────────── CHART GRID ─────────────────────── */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 14px;
+    }
+
+    .chart-wrap {
+      position: relative;
+    }
+
+    .chart-canvas {
+      width: 100% !important;
+    }
+
+    .chart-inner-label {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .chart-inner-label strong {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .chart-inner-label span {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* ─────────────────────── FUNNEL ─────────────────────── */
+    .funnel-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .funnel-step {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px 16px 18px;
+      text-align: center;
+      position: relative;
+    }
+
+    .funnel-step.peak {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .funnel-step::after {
+      content: '→';
+      position: absolute;
+      right: -14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--border);
+      z-index: 10;
+    }
+
+    .funnel-step:last-child::after { display: none; }
+
+    .funnel-icon {
+      font-size: 18px;
+      margin-bottom: 10px;
+      line-height: 1;
+    }
+
+    .funnel-n {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+
+    .funnel-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    .funnel-rate {
+      font-size: 12.5px;
+      color: var(--text-sec);
+      margin-top: 5px;
+    }
+
+    .funnel-rate .hi { color: var(--green); font-weight: 600; }
+    .funnel-rate .lo { color: var(--amber); font-weight: 600; }
+
+    /* ─────────────────────── PLATFORM BARS ─────────────────────── */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .bar-section-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .bar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .bar-item {}
+
+    .bar-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5px;
+    }
+
+    .bar-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .bar-stat {
+      font-size: 12.5px;
+      color: var(--text-sec);
+    }
+
+    .bar-track {
+      height: 7px;
+      background: var(--surface-2);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 99px;
+    }
+
+    .bar-fill.yellow  { background: var(--accent); }
+    .bar-fill.slate   { background: #CBD5E1; }
+    .bar-fill.green   { background: #4ADE80; }
+    .bar-fill.blue    { background: #60A5FA; }
+
+    /* ─────────────────────── INSIGHTS ─────────────────────── */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .insight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 22px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 3px 9px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+    }
+
+    .tag.green  { color: var(--green); background: var(--green-bg); }
+    .tag.amber  { color: var(--amber); background: var(--amber-bg); }
+    .tag.blue   { color: var(--blue);  background: var(--blue-bg); }
+    .tag.red    { color: var(--red);   background: var(--red-bg); }
+
+    .insight-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+
+    .insight-body {
+      font-size: 13.5px;
+      color: var(--text-sec);
+      line-height: 1.55;
+    }
+
+    /* ─────────────────────── DATA NOTE ─────────────────────── */
+    .data-note {
+      background: var(--accent-dim);
+      border: 1px solid rgba(245,194,0,0.25);
+      border-radius: var(--r);
+      padding: 16px 20px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 44px;
+    }
+
+    .data-note-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .data-note p {
+      font-size: 13.5px;
+      color: #7A6210;
+      line-height: 1.5;
+    }
+
+    .data-note strong {
+      font-weight: 600;
+      color: #5C4A0C;
+    }
+
+    /* ─────────────────────── FOOTER ─────────────────────── */
+    footer {
+      background: var(--dark);
+      padding: 22px 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.25);
+      font-style: italic;
+    }
+
+    .footer-meta {
+      font-size: 11.5px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ─────────────────────── RESPONSIVE ─────────────────────── */
+    @media (max-width: 920px) {
+      .kpi-row      { grid-template-columns: 1fr 1fr; }
+      .chart-grid   { grid-template-columns: 1fr; }
+      .funnel-row   { grid-template-columns: 1fr 1fr; }
+      .insights-grid { grid-template-columns: 1fr; }
+      main { padding: 36px 20px 60px; }
+      header { padding: 16px 20px; }
+      footer { padding: 20px; flex-direction: column; gap: 6px; text-align: center; }
+    }
+
+    @media (max-width: 520px) {
+      .kpi-row    { grid-template-columns: 1fr; }
+      .funnel-row { grid-template-columns: 1fr 1fr; }
+      .platform-grid { grid-template-columns: 1fr; gap: 28px; }
+      .kpi-value  { font-size: 30px; }
+      .funnel-step::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── HEADER ─── -->
+<header>
+  <div class="logo-block">
+    <img
+      class="logo-img"
+      src="https://www.xpel.com/wp-content/uploads/xpel-logo-white.png"
+      alt="XPEL"
+      onerror="this.style.display='none'; document.getElementById('logo-txt').style.display='block';"
+    />
+    <span id="logo-txt" class="logo-text">XPEL</span>
+    <div class="logo-divider"></div>
+    <span class="logo-sub">Marketing</span>
+  </div>
+  <div class="header-right">
+    <span class="header-tag">Quiz Performance Report</span>
+    <span class="header-date">June 16 – 24, 2026</span>
+  </div>
+</header>
+
+<!-- ─── MAIN ─── -->
+<main>
+
+  <!-- PAGE INTRO -->
+  <div class="page-intro">
+    <h1>Dealer Knowledge Quiz — Results</h1>
+    <p>Lead generation quiz run via Riddle. Questions were designed to both qualify leads and surface gaps in customer product knowledge across the XPEL lineup.</p>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-row">
+    <div class="kpi highlight">
+      <div class="kpi-label">Total Views</div>
+      <div class="kpi-value">415</div>
+      <div class="kpi-sub"><span class="warn">61.7%</span> chose to start the quiz</div>
+    </div>
+    <div class="kpi highlight">
+      <div class="kpi-label">Leads Captured</div>
+      <div class="kpi-value">246</div>
+      <div class="kpi-sub"><span class="pos">96.1%</span> of all starters converted</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Completion Rate</div>
+      <div class="kpi-value">91%</div>
+      <div class="kpi-sub">233 of 256 starters finished all questions</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Avg. Time on Quiz</div>
+      <div class="kpi-value">66s</div>
+      <div class="kpi-sub">Weighted across all active participants</div>
+    </div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="section">
+    <div class="chart-grid">
+
+      <!-- Daily Bar Chart -->
+      <div class="card">
+        <div class="section-header">
+          <h2>Daily Participation</h2>
+          <span class="meta">Jun 16 – 24, views vs. leads</span>
+        </div>
+        <div class="chart-wrap" style="height: 230px;">
+          <canvas id="dailyChart" class="chart-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Device Donut -->
+      <div class="card" style="display:flex; flex-direction:column;">
+        <div class="section-header">
+          <h2>Device Split</h2>
+          <span class="meta">417 sessions tracked</span>
+        </div>
+        <div class="chart-wrap" style="height: 180px; position:relative; flex:1; display:flex; align-items:center; justify-content:center;">
+          <canvas id="deviceChart" class="chart-canvas" style="max-height:180px;"></canvas>
+          <div class="chart-inner-label">
+            <strong>85%</strong>
+            <span>Mobile</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FUNNEL -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Participation Funnel</h2>
+      <span class="meta">View → Start → Finish → Lead</span>
+    </div>
+    <div class="funnel-row">
+      <div class="funnel-step">
+        <div class="funnel-icon">👁</div>
+        <div class="funnel-n">415</div>
+        <div class="funnel-label">Views</div>
+        <div class="funnel-rate">Entry point</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-icon">▶</div>
+        <div class="funnel-n">256</div>
+        <div class="funnel-label">Started</div>
+        <div class="funnel-rate"><span class="lo">61.7%</span> of viewers</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-icon">✓</div>
+        <div class="funnel-n">233</div>
+        <div class="funnel-label">Finished</div>
+        <div class="funnel-rate"><span class="hi">91.0%</span> of starters</div>
+      </div>
+      <div class="funnel-step peak">
+        <div class="funnel-icon">⭐</div>
+        <div class="funnel-n">246</div>
+        <div class="funnel-label">Leads</div>
+        <div class="funnel-rate"><span class="hi">96.1%</span> of starters</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATFORM BREAKDOWN -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Platform &amp; Device</h2>
+      <span class="meta">Session-level data</span>
+    </div>
+    <div class="card">
+      <div class="platform-grid">
+        <div>
+          <p class="bar-section-label">Device Type</p>
+          <div class="bar-list">
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Mobile</span>
+                <span class="bar-stat">355 &nbsp;·&nbsp; 85.1%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill yellow" style="width:85.1%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Desktop</span>
+                <span class="bar-stat">62 &nbsp;·&nbsp; 14.9%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill slate" style="width:14.9%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Tablet</span>
+                <span class="bar-stat">0 &nbsp;·&nbsp; 0%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill slate" style="width:0%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <p class="bar-section-label">Operating System</p>
+          <div class="bar-list">
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">iOS (iPhone/iPad)</span>
+                <span class="bar-stat">255 &nbsp;·&nbsp; 61.4%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill yellow" style="width:61.4%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Android</span>
+                <span class="bar-stat">97 &nbsp;·&nbsp; 23.4%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill green" style="width:23.4%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Windows</span>
+                <span class="bar-stat">4 &nbsp;·&nbsp; 1.0%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill slate" style="width:1%"></div></div>
+            </div>
+            <div class="bar-item">
+              <div class="bar-meta">
+                <span class="bar-name">Unknown / Other</span>
+                <span class="bar-stat">~59 &nbsp;·&nbsp; ~14.2%</span>
+              </div>
+              <div class="bar-track"><div class="bar-fill slate" style="width:14.2%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DATA NOTE -->
+  <div class="data-note">
+    <div class="data-note-icon">ℹ️</div>
+    <p>
+      <strong>About the block-level data:</strong> The quiz contained 9 question blocks (Riddle blocks 1–5, 8–11 — with blocks 6 &amp; 7 likely serving as the lead form / transition screens). The CSV export from Riddle captures <em>session-level</em> engagement for each block, not per-answer choice breakdowns. Right/wrong percentages and individual answer distributions for each question are available in the <strong>Riddle dashboard</strong> under each block's analytics view.
+    </p>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Marketing Insights</h2>
+      <span class="meta">What the data tells us about our audience</span>
+    </div>
+    <div class="insights-grid">
+
+      <div class="insight">
+        <span class="tag green">✓ Strength</span>
+        <p class="insight-title">Exceptional lead capture rate</p>
+        <p class="insight-body">96.1% of everyone who started the quiz became a lead — well above typical interactive content benchmarks. The quiz format is clearly working as a low-friction lead gen mechanism. Customers are engaged enough to follow through, likely because answering questions feels rewarding rather than transactional.</p>
+      </div>
+
+      <div class="insight">
+        <span class="tag green">✓ Strength</span>
+        <p class="insight-title">Very low drop-off once started</p>
+        <p class="insight-body">91% completion rate from start to finish is strong. The 9-question structure and estimated 66-second completion time suggest the quiz length is well-calibrated — long enough to gather insight, short enough that people don't bounce. No major friction points in the question flow.</p>
+      </div>
+
+      <div class="insight">
+        <span class="tag amber">⚠ Opportunity</span>
+        <p class="insight-title">Low view-to-start rate (61.7%)</p>
+        <p class="insight-body">38% of viewers never clicked to start. Some of this is organic bounce or crawler traffic, but it also signals the intro screen or entry CTA may not be compelling enough. A stronger hook — clearer value prop, more personalized framing like "How well do you know XPEL?" — could meaningfully close this gap on future runs.</p>
+      </div>
+
+      <div class="insight">
+        <span class="tag blue">→ Audience Signal</span>
+        <p class="insight-title">Audience is overwhelmingly mobile — and iOS</p>
+        <p class="insight-body">85% of sessions were on mobile, with iOS at 61.4% of total and Android at 23.4%. This likely reflects the dealer/installer audience engaging from the shop floor or on-the-go. Any follow-up quiz, tool, or campaign targeting this audience should be designed iPhone-first with no desktop dependency.</p>
+      </div>
+
+      <div class="insight">
+        <span class="tag amber">⚠ Opportunity</span>
+        <p class="insight-title">Traffic concentrated in a 3-day window</p>
+        <p class="insight-body">317 of 415 views (76%) arrived June 19–21 — the likely send date of the campaign blast. Activity dropped sharply after June 22 with near-zero engagement. This quiz is generating essentially zero organic or long-tail traffic. Embedding the link in dealer portal nav, email footers, or regular nurture sequences would give it sustained shelf life.</p>
+      </div>
+
+      <div class="insight">
+        <span class="tag blue">→ Product Knowledge</span>
+        <p class="insight-title">Quiz results can map where education gaps exist</p>
+        <p class="insight-body">With 233+ completed sessions, there's a solid signal set from the Riddle answer-level data. Questions where wrong answers clustered should flag product lines or use cases we may be under-communicating in dealer training or sales materials. Cross-referencing those against the questions most closely tied to new products (PPF tiers, Ceramic Express) would be especially valuable.</p>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <span class="footer-brand">XPEL</span>
+  <span class="footer-meta">Internal Use Only &nbsp;·&nbsp; Riddle quiz data &nbsp;·&nbsp; Campaign period: Jun 16–24, 2026</span>
+</footer>
+
+<!-- ─── CHARTS JS ─── -->
+<script>
+  // ── Daily Participation (Grouped Bar) ──────────────────────
+  const dailyCtx = document.getElementById('dailyChart').getContext('2d');
+
+  Chart.defaults.font.family = "'Inter', -apple-system, sans-serif";
+
+  new Chart(dailyCtx, {
+    type: 'bar',
+    data: {
+      labels: ['Jun 16','Jun 17','Jun 18','Jun 19','Jun 20','Jun 21','Jun 22','Jun 23','Jun 24'],
+      datasets: [
+        {
+          label: 'Views',
+          data: [35, 29, 11, 82, 94, 141, 12, 5, 6],
+          backgroundColor: '#E8E5DA',
+          borderRadius: 4,
+          borderSkipped: false,
+          order: 2
+        },
+        {
+          label: 'Starts',
+          data: [3, 6, 1, 70, 73, 102, 1, 0, 0],
+          backgroundColor: '#B8B5A8',
+          borderRadius: 4,
+          borderSkipped: false,
+          order: 1
+        },
+        {
+          label: 'Leads',
+          data: [2, 6, 1, 68, 69, 99, 1, 0, 0],
+          backgroundColor: '#F5C200',
+          borderRadius: 4,
+          borderSkipped: false,
+          order: 0
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 11.5, weight: '500' },
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 16,
+            color: '#69696A'
+          }
+        },
+        tooltip: {
+          mode: 'index',
+          intersect: false,
+          padding: 10,
+          titleFont: { size: 12, weight: '600' },
+          bodyFont: { size: 12 }
+        }
+      },
+      scales: {
+        x: {
+          grid: { display: false },
+          border: { display: false },
+          ticks: { font: { size: 11 }, color: '#A3A3A0' }
+        },
+        y: {
+          beginAtZero: true,
+          border: { display: false },
+          grid: { color: '#F0EFEB', lineWidth: 1 },
+          ticks: { font: { size: 11 }, color: '#A3A3A0', maxTicksLimit: 5 }
+        }
+      }
+    }
+  });
+
+  // ── Device Donut ──────────────────────────────────────────
+  const devCtx = document.getElementById('deviceChart').getContext('2d');
+
+  new Chart(devCtx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Mobile (85.1%)', 'Desktop (14.9%)'],
+      datasets: [{
+        data: [355, 62],
+        backgroundColor: ['#F5C200', '#E3E2DE'],
+        borderWidth: 0,
+        hoverOffset: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      cutout: '74%',
+      plugins: {
+        legend: {
+          position: 'bottom',
+          labels: {
+            font: { size: 11.5, weight: '500' },
+            boxWidth: 10,
+            boxHeight: 10,
+            padding: 14,
+            color: '#69696A'
+          }
+        },
+        tooltip: {
+          padding: 10,
+          titleFont: { size: 12 },
+          bodyFont: { size: 12 }
+        }
+      }
+    }
+  });
+
+  // ── Logo fallback logic ────────────────────────────────────
+  const logoImg = document.querySelector('.logo-img');
+  if (logoImg) {
+    // Also try alternate URL before falling back to text
+    logoImg.addEventListener('error', function () {
+      // Try a second URL
+      const triedUrls = logoImg.dataset.tried || '';
+      if (!triedUrls.includes('2')) {
+        logoImg.dataset.tried = '2';
+        logoImg.src = 'https://cdn.xpel.com/wp-content/uploads/xpel-logo-white.png';
+      } else if (!triedUrls.includes('3')) {
+        logoImg.dataset.tried = triedUrls + '3';
+        logoImg.src = 'https://www.xpel.com/themes/xpel/dist/img/xpel-logo-white.svg';
+      } else {
+        logoImg.style.display = 'none';
+        document.getElementById('logo-txt').style.display = 'block';
+      }
+    });
+  }
+</script>
+</body>
+</html>
