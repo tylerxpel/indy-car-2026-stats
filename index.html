@@ -62,18 +62,6 @@
     .nav-item:hover { color: rgba(255,255,255,0.75); }
     .nav-item.active { color: #fff; border-bottom-color: var(--accent); font-weight: 600; }
 
-    /* Mid-page centered navigation */
-    .mid-nav {
-      display: flex; gap: 12px; justify-content: center; margin: 18px 0;
-    }
-    .mid-nav__btn {
-      background: var(--surface); border: 1px solid var(--border); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600;
-      color: var(--text); font-family: inherit;
-    }
-    .mid-nav__btn[aria-selected="true"], .mid-nav__btn.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
-    }
-
     .tab-section { display: none; }
     .tab-section.visible { display: block; }
 
@@ -332,7 +320,7 @@
 
 <header>
   <div class="logo-block">
-    <img src="data:image/webp;base64,UklGRhoTAABXRUJQVlA4WAoAAAAQAAAA+wMABQEAQUxQSHAOAAABoFXbVh3bQgISkIAEJEQCEiIBB5GAhEhAQiQgAQl1n/vUJmvNuUJ+IsITbFuSJEmS9L48Y5m+mTsLTfgRLyHS1uGL0hRFdYLDn01RnN4t44[...]" alt="XPEL logo" style="height:26px;">
+    <img src="data:image/webp;base64,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" alt="XPEL" style="height:28px;width:auto;display:block;">
     <div class="logo-div"></div>
     <span class="logo-sub">Marketing</span>
   </div>
@@ -349,29 +337,23 @@
 
 <!-- ══════════════════════════════════════════════════════
      TAB 1: OVERVIEW
-══════════════════════════════════════════════════════ -->
+═══════════════════════════════════════════════════════ -->
 <div id="tab-overview" class="tab-section visible">
 <div class="main-wrap">
 
   <div class="page-intro">
     <h1>2026 IndyCar Grand Prix — Quiz Submission Data</h1>
-    <p>Session-level engagement data filtered to the active campaign window (Jun 19–24). For per-question answer distributions and marketing insights, see <a onclick="showTab('questions')" href="#">Question Breakdown</a>.</p>
-  </div>
-
-  <!-- Mid-page navigation (centered) -->
-  <div class="mid-nav" role="tablist" aria-label="Statistics navigation">
-    <button class="mid-nav__btn" role="tab" aria-selected="true" data-tab="overview" onclick="showTab('overview')" id="midtab-overview">Overview</button>
-    <button class="mid-nav__btn" role="tab" aria-selected="false" data-tab="questions" onclick="showTab('questions')" id="midtab-questions">Question Breakdown</button>
+    <p>Session-level engagement data filtered to the active campaign window (Jun 19–24). For per-question answer distributions and marketing insights, see <a onclick="showTab('questions')" href="#">Question Breakdown →</a></p>
   </div>
 
   <div class="notice amber">
     <span>🔍</span>
-    <div><strong>Data scope:</strong> Filtered to June 19–24. Pre-campaign views (Jun 16–18) removed — near-100% desktop sessions with very low start rates, consistent with internal testing[...]</div>
+    <div><strong>Data scope:</strong> Filtered to June 19–24. Pre-campaign views (Jun 16–18) removed — near-100% desktop sessions with very low start rates, consistent with internal testing. Email-level filtering (thoffarth@xpel.com and @xpel.com domains) must be applied at the lead export level in Riddle or HubSpot — those addresses are not present in session-level CSV data.</div>
   </div>
 
   <div class="notice dark">
     <span>🏆</span>
-    <div><strong>Prize context:</strong> This quiz was tied to a prize draw for a Full Vehicle Tint Install. Both result tiers ("Well done" and "Nice try") were entered to win — giving every st[...]</div>
+    <div><strong>Prize context:</strong> This quiz was tied to a prize draw for a Full Vehicle Tint Install. Both result tiers ("Well done" and "Nice try") were entered to win — giving every starter full incentive to complete. 89% of completers achieved the high-score result. This context is relevant to the lead capture and completion rate metrics below.</div>
   </div>
 
   <div class="kpi-row">
@@ -482,7 +464,7 @@
       </div>
       <div class="mobile-callout">
         <div class="mobile-callout-icon">📱</div>
-        <p>Campaign traffic was <strong>virtually 100% mobile</strong> — the 14% desktop share in the unfiltered data came entirely from pre-campaign sessions (Jun 16–18). Any future quiz, to[...]</p>
+        <p>Campaign traffic was <strong>virtually 100% mobile</strong> — the 14% desktop share in the unfiltered data came entirely from pre-campaign sessions (Jun 16–18). Any future quiz, tool, or follow-up campaign targeting this same audience should be built and tested on <strong>iPhone first</strong>, iOS Safari as the primary environment.</p>
       </div>
     </div>
   </div>
@@ -495,32 +477,32 @@
       <div class="insight">
         <span class="tag green">✓ Strength</span>
         <p class="insight-title">Exceptional lead capture — 96.3%</p>
-        <p class="insight-body">Nearly everyone who started the quiz became a lead. The prize incentive (Full Vehicle Tint Install) contributed to this, but the quiz format itself — low frictio[...]</p>
+        <p class="insight-body">Nearly everyone who started the quiz became a lead. The prize incentive (Full Vehicle Tint Install) contributed to this, but the quiz format itself — low friction, fast, mobile-native — is the delivery mechanism that made it work. A prize alone doesn't drive 91% completion; the experience does.</p>
       </div>
       <div class="insight">
         <span class="tag green">✓ Strength</span>
         <p class="insight-title">89% of completers scored "Well done"</p>
-        <p class="insight-body">207 of 233 respondents who reached the results screen achieved the high-score result. This speaks to generally strong brand and product awareness — but the quest[...]</p>
+        <p class="insight-body">207 of 233 respondents who reached the results screen achieved the high-score result. This speaks to generally strong brand and product awareness — but the question-level data reveals specific gaps around the warranty duration and full product lineup that the aggregate score obscures.</p>
       </div>
       <div class="insight">
         <span class="tag amber">⚠ Opportunity</span>
         <p class="insight-title">Warranty knowledge is the biggest gap</p>
-        <p class="insight-body">34% of respondents didn't know XPEL PPF carries a 10-year warranty, with 29% guessing "5 years." This is one of XPEL's strongest competitive differentiators and ap[...]</p>
+        <p class="insight-body">34% of respondents didn't know XPEL PPF carries a 10-year warranty, with 29% guessing "5 years." This is one of XPEL's strongest competitive differentiators and appears to be under-communicated. See the Question Breakdown for the full breakdown.</p>
       </div>
       <div class="insight">
         <span class="tag amber">⚠ Opportunity</span>
         <p class="insight-title">24% don't know XPEL's full product range</p>
-        <p class="insight-body">On the "what products does XPEL produce?" question, 24% selected a single product category rather than "All of the Above." Customers siloed into PPF-only or tint-o[...]</p>
+        <p class="insight-body">On the "what products does XPEL produce?" question, 24% selected a single product category rather than "All of the Above." Customers siloed into PPF-only or tint-only awareness represent a direct cross-sell opportunity through targeted follow-up content.</p>
       </div>
       <div class="insight">
         <span class="tag blue">→ Audience Signal</span>
         <p class="insight-title">iPhone-first, not just mobile-first</p>
-        <p class="insight-body">70.9% iOS, 28.2% Android, essentially 0% desktop. All future campaigns, tools, and landing pages targeting this dealer/installer audience should be designed for iO[...]</p>
+        <p class="insight-body">70.9% iOS, 28.2% Android, essentially 0% desktop. All future campaigns, tools, and landing pages targeting this dealer/installer audience should be designed for iOS Safari specifically before any other environment.</p>
       </div>
       <div class="insight">
         <span class="tag amber">⚠ Opportunity</span>
         <p class="insight-title">All traffic came from a single send window</p>
-        <p class="insight-body">317 of 340 views arrived June 19–21 with near-zero activity by June 22. No organic traffic at all. Embedding the link in dealer portal nav, onboarding emails, or[...]</p>
+        <p class="insight-body">317 of 340 views arrived June 19–21 with near-zero activity by June 22. No organic traffic at all. Embedding the link in dealer portal nav, onboarding emails, or recurring nurture sequences would extend the quiz's shelf life well beyond a single campaign blast.</p>
       </div>
     </div>
   </div>
@@ -530,24 +512,18 @@
 
 <!-- ══════════════════════════════════════════════════════
      TAB 2: QUESTION BREAKDOWN
-══════════════════════════════════════════════════════ -->
+═══════════════════════════════════════════════════════ -->
 <div id="tab-questions" class="tab-section">
 <div class="main-wrap narrow">
 
   <div class="page-intro">
     <h1>2026 IndyCar GP — Per-Question Answer Analysis</h1>
-    <p>How respondents answered each of the 9 quiz questions — answer distribution, right vs. wrong breakdown, and what each result signals about XPEL brand and product awareness in the market.[...]</p>
-  </div>
-
-  <!-- Mid-page navigation (centered) -->
-  <div class="mid-nav" role="tablist" aria-label="Statistics navigation">
-    <button class="mid-nav__btn" role="tab" aria-selected="false" data-tab="overview" onclick="showTab('overview')" id="midtab-overview-2">Overview</button>
-    <button class="mid-nav__btn" role="tab" aria-selected="true" data-tab="questions" onclick="showTab('questions')" id="midtab-questions-2">Question Breakdown</button>
+    <p>How respondents answered each of the 9 quiz questions — answer distribution, right vs. wrong breakdown, and what each result signals about XPEL brand and product awareness in the market.</p>
   </div>
 
   <div class="notice blue">
     <span>📋</span>
-    <div><strong>Data source:</strong> Answer-level data sourced directly from Riddle block analytics and reflects the full quiz period (Jun 16–24). Blocks 6 and 7 are absent — they served as[...]</div>
+    <div><strong>Data source:</strong> Answer-level data sourced directly from Riddle block analytics and reflects the full quiz period (Jun 16–24). Blocks 6 and 7 are absent — they served as the lead form and transition screens. All 6 question blocks are fully populated below.</div>
   </div>
 
   <div class="quiz-summary">
@@ -582,7 +558,7 @@
       <div class="prize-icon">🎁</div>
       <div>
         <strong>Prize: Full Vehicle Tint Install</strong>
-        <p>Both result tiers were entered into the prize draw, ensuring 100% of completers had full incentive to finish and submit their information. The 11% "Nice Try" group (26 people) represen[...]</p>
+        <p>Both result tiers were entered into the prize draw, ensuring 100% of completers had full incentive to finish and submit their information. The 11% "Nice Try" group (26 people) represents respondents who likely missed 1–2 questions — most probably the warranty question (34% wrong) or the product breadth question (24% wrong), which were the two lowest-scoring questions in the quiz.</p>
       </div>
     </div>
   </div>
@@ -600,17 +576,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-section').forEach(el => el.classList.remove('visible'));
   document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('visible');
-  const topNavBtn = document.querySelector('[data-tab="' + name + '"]');
-  if (topNavBtn) topNavBtn.classList.add('active');
-
-  // Update mid-page nav buttons (if present)
-  document.querySelectorAll('.mid-nav__btn').forEach(btn => {
-    const selected = btn.getAttribute('data-tab') === name;
-    btn.setAttribute('aria-selected', selected ? 'true' : 'false');
-    btn.classList.toggle('active', selected);
-    btn.setAttribute('tabindex', selected ? '0' : '-1');
-  });
-
+  document.querySelector('[data-tab="' + name + '"]').classList.add('active');
   window.scrollTo(0, 0);
 }
 
@@ -651,7 +617,7 @@ new Chart(document.getElementById('deviceChart').getContext('2d'), {
   }
 });
 
-// ── QUESTION DATA ─────────────────────────────────────────────────────────
+// ── QUESTION DATA ────────────────────────────────────────────────────────────
 const questions = [
   {
     num:1, blockId:1, qType:'Single Select', category:'brand',
@@ -664,7 +630,7 @@ const questions = [
     ],
     insightLevel:'strong',
     insightTitle:'Strong Brand Awareness — Acronym is Well Understood',
-    insightBody:'94% correctly identified PPF as "Paint Protection Film," indicating strong foundational brand literacy. The humorous distractors (Professional Pillow Fighter and Premium Potato F[...]'
+    insightBody:'94% correctly identified PPF as "Paint Protection Film," indicating strong foundational brand literacy. The humorous distractors (Professional Pillow Fighter and Premium Potato Fries) each captured only 3%, confirming they functioned as fun fillers. No material knowledge gap here — PPF can be used confidently in dealer-facing and consumer content without explanation.'
   },
   {
     num:2, blockId:4, qType:'Single Select', category:'product',
@@ -677,7 +643,7 @@ const questions = [
     ],
     insightLevel:'moderate',
     insightTitle:'Warranty Knowledge Gap — Key Marketing Opportunity',
-    insightBody:'34% of respondents (82 people) did not know XPEL PPF carries a 10-year warranty. The most common wrong answer was "5 Years" (29%), suggesting customers default to a shorter indus[...]'
+    insightBody:'34% of respondents (82 people) did not know XPEL PPF carries a 10-year warranty. The most common wrong answer was "5 Years" (29%), suggesting customers default to a shorter industry expectation. The 10-year warranty is one of XPEL\'s strongest competitive differentiators and appears significantly under-communicated. It should feature prominently in installer training, point-of-sale materials, and awareness campaigns — particularly in direct comparison against competitor warranties.'
   },
   {
     num:3, blockId:5, qType:'Single Select', category:'product',
@@ -689,7 +655,7 @@ const questions = [
     ],
     insightLevel:'strong',
     insightTitle:'Supercar Exclusivity Misconception — Minority But Addressable',
-    insightBody:'86% correctly identified that XPEL PPF is available for any vehicle. However, 14% (34 people) still associate it exclusively with high-end or exotic cars — a perception likely [...]
+    insightBody:'86% correctly identified that XPEL PPF is available for any vehicle. However, 14% (34 people) still associate it exclusively with high-end or exotic cars — a perception likely reinforced by XPEL\'s motorsports presence and premium positioning. While not a widespread gap, this segment may self-disqualify from purchasing. Showcasing everyday vehicles — trucks, family SUVs, daily drivers — more prominently in content and campaigns could close this perception gap over time.'
   },
   {
     num:4, blockId:8, qType:'Single Select', category:'product',
@@ -701,7 +667,7 @@ const questions = [
     ],
     insightLevel:'strong',
     insightTitle:'Strong Awareness of Colored PPF Options',
-    insightBody:'89% correctly identified that XPEL PPF is available in 16 colors, indicating strong product feature awareness for the colored film lineup. The 11% who answered False may still as[...]
+    insightBody:'89% correctly identified that XPEL PPF is available in 16 colors, indicating strong product feature awareness for the colored film lineup. The 11% who answered False may still associate protective film with only clear options. No urgent gap here, but targeted content highlighting specific colors — particularly for customers who prioritize aesthetics alongside protection — could convert this smaller uninformed segment.'
   },
   {
     num:5, blockId:9, qType:'Single Select', category:'fun',
@@ -714,7 +680,7 @@ const questions = [
     ],
     insightLevel:'fun',
     insightTitle:'Strong Sponsorship Awareness — Engagement Question',
-    insightBody:'87% correctly identified Scott McLaughlin as XPEL\'s INDYCAR partner, indicating strong motorsports partnership awareness in this audience. The fictional distractors — Ricky Bo[...]
+    insightBody:'87% correctly identified Scott McLaughlin as XPEL\'s INDYCAR partner, indicating strong motorsports partnership awareness in this audience. The fictional distractors — Ricky Bobby (Talladega Nights) and Max Oversteer — captured a combined 13%, almost certainly from fast tapping rather than genuine confusion. This question primarily serves as an engagement signal, and the high recognition rate confirms XPEL\'s racing sponsorship is actively reaching this dealer and customer base.'
   },
   {
     num:6, blockId:10, qType:'Single Select', category:'brand',
@@ -729,11 +695,11 @@ const questions = [
     ],
     insightLevel:'moderate',
     insightTitle:'Product Breadth Awareness Gap — Cross-Category Opportunity',
-    insightBody:'24% of respondents (56 people) associated XPEL with only one product category rather than the full lineup. PPF-only selections led at 11% (25 people), followed by Window Tint at [...]
+    insightBody:'24% of respondents (56 people) associated XPEL with only one product category rather than the full lineup. PPF-only selections led at 11% (25 people), followed by Window Tint at 7% (16). Customers siloed into a single product are missing significant cross-sell opportunities. Campaigns connecting PPF customers to ceramic coatings, window tint, and care products — through installer training, follow-up nurture sequences, and bundled service messaging — represent a direct revenue and awareness opportunity.'
   }
 ];
 
-// ── RENDER ────────────────────────────────────────────────────────────
+// ── RENDER ───────────────────────────────────────────────────────────────────
 const catMap = {
   fun:     { cls:'fun',     label:'Fun / Sponsorship'  },
   brand:   { cls:'brand',   label:'Brand Awareness'    },
@@ -837,16 +803,7 @@ questions.forEach(q => {
   container.appendChild(d);
 });
 
-// Ensure mid-nav state matches visible tab on load
-document.addEventListener('DOMContentLoaded', function() {
-  const visible = document.querySelector('.tab-section.visible');
-  if (visible) {
-    const id = visible.id.replace('tab-','');
-    showTab(id);
-  }
-});
-
-// ────────────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 </script>
 </body>
 </html>
