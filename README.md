@@ -13,12 +13,6 @@ Published via GitHub Pages: `https://tylerxpel.github.io/indy-car-2026-stats/`
 | `index.html` | Self-contained report page (styles + charts inline) |
 | `.github/workflows/pages.yml` | GitHub Actions workflow that deploys to Pages on push to `main` |
 
-## Enabling GitHub Pages
-
-1. Go to **Settings → Pages** in this repository.
-2. Under *Source*, select **GitHub Actions**.
-3. Push to `main` — the workflow deploys automatically.
-
 ## Report Highlights
 
 - **415** total quiz views · **Jun 16–24, 2026**
